@@ -1,0 +1,841 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Anheuser Busch Project},
+            pdfauthor={Billy},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Anheuser Busch Project}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{Billy}
+    \preauthor{\centering\large\emph}
+  \postauthor{\par}
+      \predate{\centering\large\emph}
+  \postdate{\par}
+    \date{10/18/2019}
+
+
+\begin{document}
+\maketitle
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Load Packages#}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(e1071)}
+\KeywordTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(class)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching packages ------------------------------------------------------------ tidyverse 1.2.1 --
+\end{verbatim}
+
+\begin{verbatim}
+## v tibble  2.1.3     v purrr   0.3.2
+## v tidyr   1.0.0     v stringr 1.4.0
+## v readr   1.3.1     v forcats 0.4.0
+\end{verbatim}
+
+\begin{verbatim}
+## -- Conflicts --------------------------------------------------------------- tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## x purrr::lift()   masks caret::lift()
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Import Data#}
+\NormalTok{Beers <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'Beers.csv'}\NormalTok{)}
+\NormalTok{Breweries <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{'Breweries.csv'}\NormalTok{)}
+\CommentTok{#Summarize data#}
+\KeywordTok{summary}\NormalTok{(Beers)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                      Name         Beer_ID            ABV         
+##  Nonstop Hef Hop       :  12   Min.   :   1.0   Min.   :0.00100  
+##  Dale's Pale Ale       :   6   1st Qu.: 808.2   1st Qu.:0.05000  
+##  Oktoberfest           :   6   Median :1453.5   Median :0.05600  
+##  Longboard Island Lager:   4   Mean   :1431.1   Mean   :0.05977  
+##  1327 Pod's ESB        :   3   3rd Qu.:2075.8   3rd Qu.:0.06700  
+##  Boston Lager          :   3   Max.   :2692.0   Max.   :0.12800  
+##  (Other)               :2376                    NA's   :62       
+##       IBU           Brewery_id                               Style     
+##  Min.   :  4.00   Min.   :  1.0   American IPA                  : 424  
+##  1st Qu.: 21.00   1st Qu.: 94.0   American Pale Ale (APA)       : 245  
+##  Median : 35.00   Median :206.0   American Amber / Red Ale      : 133  
+##  Mean   : 42.71   Mean   :232.7   American Blonde Ale           : 108  
+##  3rd Qu.: 64.00   3rd Qu.:367.0   American Double / Imperial IPA: 105  
+##  Max.   :138.00   Max.   :558.0   American Pale Wheat Ale       :  97  
+##  NA's   :1005                     (Other)                       :1298  
+##      Ounces     
+##  Min.   : 8.40  
+##  1st Qu.:12.00  
+##  Median :12.00  
+##  Mean   :13.59  
+##  3rd Qu.:16.00  
+##  Max.   :32.00  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{summary}\NormalTok{(Breweries)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##     Brew_ID                           Name           City    
+##  Min.   :  1.0   Blackrocks Brewery     :  2   Portland: 17  
+##  1st Qu.:140.2   Blue Mountain Brewery  :  2   Boulder :  9  
+##  Median :279.5   Lucette Brewing Company:  2   Chicago :  9  
+##  Mean   :279.5   Oskar Blues Brewery    :  2   Seattle :  9  
+##  3rd Qu.:418.8   Otter Creek Brewing    :  2   Austin  :  8  
+##  Max.   :558.0   Sly Fox Brewing Company:  2   Denver  :  8  
+##                  (Other)                :546   (Other) :498  
+##      State    
+##   CO    : 47  
+##   CA    : 39  
+##   MI    : 32  
+##   OR    : 29  
+##   TX    : 28  
+##   PA    : 25  
+##  (Other):358
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Find out how many breweries in each state#}
+\KeywordTok{summary}\NormalTok{(Breweries}\OperatorTok{$}\NormalTok{State)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  AK  AL  AR  AZ  CA  CO  CT  DC  DE  FL  GA  HI  IA  ID  IL  IN  KS  KY 
+##   7   3   2  11  39  47   8   1   2  15   7   4   5   5  18  22   3   4 
+##  LA  MA  MD  ME  MI  MN  MO  MS  MT  NC  ND  NE  NH  NJ  NM  NV  NY  OH 
+##   5  23   7   9  32  12   9   2   9  19   1   5   3   3   4   2  16  15 
+##  OK  OR  PA  RI  SC  SD  TN  TX  UT  VA  VT  WA  WI  WV  WY 
+##   6  29  25   5   4   1   3  28   4  16  10  23  20   1   4
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot data in bar chart#}
+\KeywordTok{ggplot}\NormalTok{(Breweries,}\DataTypeTok{mapping=}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{State, }\DataTypeTok{fill=}\NormalTok{State))}\OperatorTok{+}\KeywordTok{geom_bar}\NormalTok{()}\OperatorTok{+}\KeywordTok{theme}\NormalTok{(}\DataTypeTok{axis.title.x=}\KeywordTok{element_blank}\NormalTok{(),}\DataTypeTok{axis.text.x=}\KeywordTok{element_blank}\NormalTok{(),}\DataTypeTok{axis.ticks.x=}\KeywordTok{element_blank}\NormalTok{())}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Combine data sets#}
+\NormalTok{BBeers <-}\StringTok{ }\KeywordTok{inner_join}\NormalTok{(Beers, Breweries, }\DataTypeTok{by=}\KeywordTok{c}\NormalTok{(}\StringTok{"Brewery_id"}\NormalTok{=}\StringTok{"Brew_ID"}\NormalTok{))}
+\CommentTok{#Print first 6 values of combined data#}
+\KeywordTok{head}\NormalTok{(BBeers,}\DataTypeTok{n=}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                Name.x Beer_ID   ABV IBU Brewery_id
+## 1            Pub Beer    1436 0.050  NA        409
+## 2         Devil's Cup    2265 0.066  NA        178
+## 3 Rise of the Phoenix    2264 0.071  NA        178
+## 4            Sinister    2263 0.090  NA        178
+## 5       Sex and Candy    2262 0.075  NA        178
+## 6        Black Exodus    2261 0.077  NA        178
+##                            Style Ounces                    Name.y City
+## 1            American Pale Lager     12 10 Barrel Brewing Company Bend
+## 2        American Pale Ale (APA)     12       18th Street Brewery Gary
+## 3                   American IPA     12       18th Street Brewery Gary
+## 4 American Double / Imperial IPA     12       18th Street Brewery Gary
+## 5                   American IPA     12       18th Street Brewery Gary
+## 6                  Oatmeal Stout     12       18th Street Brewery Gary
+##   State
+## 1    OR
+## 2    IN
+## 3    IN
+## 4    IN
+## 5    IN
+## 6    IN
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Print last 6 values of combined data#}
+\KeywordTok{tail}\NormalTok{(BBeers,}\DataTypeTok{n=}\DecValTok{6}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                           Name.x Beer_ID   ABV IBU Brewery_id
+## 2405 Rocky Mountain Oyster Stout    1035 0.075  NA        425
+## 2406                   Belgorado     928 0.067  45        425
+## 2407               Rail Yard Ale     807 0.052  NA        425
+## 2408             B3K Black Lager     620 0.055  NA        425
+## 2409         Silverback Pale Ale     145 0.055  40        425
+## 2410        Rail Yard Ale (2009)      84 0.052  NA        425
+##                         Style Ounces                  Name.y   City State
+## 2405           American Stout     12 Wynkoop Brewing Company Denver    CO
+## 2406              Belgian IPA     12 Wynkoop Brewing Company Denver    CO
+## 2407 American Amber / Red Ale     12 Wynkoop Brewing Company Denver    CO
+## 2408              Schwarzbier     12 Wynkoop Brewing Company Denver    CO
+## 2409  American Pale Ale (APA)     12 Wynkoop Brewing Company Denver    CO
+## 2410 American Amber / Red Ale     12 Wynkoop Brewing Company Denver    CO
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Check for missing values#}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(BBeers}\OperatorTok{$}\NormalTok{ABV))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#62 missing ABVs#}
+\KeywordTok{sum}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(BBeers}\OperatorTok{$}\NormalTok{IBU))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 1005
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#1005 missing IBUs#}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot median ABV by State#}
+\NormalTok{BBeers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(State) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{ABV_median =} \KeywordTok{median}\NormalTok{(}\KeywordTok{na.omit}\NormalTok{(ABV)))}\OperatorTok{%>%}\StringTok{ }\KeywordTok{gather}\NormalTok{(key,value,}\OperatorTok{-}\NormalTok{State) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(State,value,}\DataTypeTok{fill=}\NormalTok{key))}\OperatorTok{+}\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"dodge2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot median IBU by State#}
+\NormalTok{BBeers }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(State) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{IBU_median =} \KeywordTok{median}\NormalTok{(}\KeywordTok{na.omit}\NormalTok{(IBU)))}\OperatorTok{%>%}\StringTok{ }\KeywordTok{gather}\NormalTok{(key,value,}\OperatorTok{-}\NormalTok{State) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}\KeywordTok{aes}\NormalTok{(State,value,}\DataTypeTok{fill=}\NormalTok{key))}\OperatorTok{+}\KeywordTok{geom_bar}\NormalTok{(}\DataTypeTok{stat =} \StringTok{"identity"}\NormalTok{, }\DataTypeTok{position =} \StringTok{"dodge2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1 rows containing missing values (geom_bar).
+\end{verbatim}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-4-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Find beer with highest ABV#}
+\NormalTok{maxABV <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(BBeers,ABV }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(}\KeywordTok{na.omit}\NormalTok{(ABV)))}
+\CommentTok{#Lee Hill Series Vol. 5, Upslope Brewing Company, Boulder, CO#}
+\CommentTok{#Find beer with highest IBU#}
+\NormalTok{maxIBU <-}\StringTok{ }\KeywordTok{subset}\NormalTok{(BBeers,IBU }\OperatorTok{==}\StringTok{ }\KeywordTok{max}\NormalTok{(}\KeywordTok{na.omit}\NormalTok{(IBU)))}
+\CommentTok{#Bitter Bitch Imperial IPA, Astoria Brewing Company, Astoria, Oregon#}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Summary statistics of ABV#}
+\KeywordTok{summary}\NormalTok{(BBeers}\OperatorTok{$}\NormalTok{ABV)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+## 0.00100 0.05000 0.05600 0.05977 0.06700 0.12800      62
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Data distribution and histogram of ABV#}
+\KeywordTok{ggplot}\NormalTok{(BBeers,}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ABV))}\OperatorTok{+}\KeywordTok{geom_histogram}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 62 rows containing non-finite values (stat_bin).
+\end{verbatim}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-6-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Plot relationship between ABV and IBU#}
+\KeywordTok{ggplot}\NormalTok{(BBeers,}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ABV,}\DataTypeTok{y=}\NormalTok{IBU))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{()}\OperatorTok{+}\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1005 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1005 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Classify beers as IPA, Ale or Other#}
+\NormalTok{BBeers}\OperatorTok{$}\NormalTok{Class <-}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(}\StringTok{"IPA"}\NormalTok{, BBeers}\OperatorTok{$}\NormalTok{Style, }\DataTypeTok{ignore.case =}\NormalTok{ T), }\StringTok{"IPA"}\NormalTok{, }
+         \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{grepl}\NormalTok{(}\StringTok{"Ale"}\NormalTok{, BBeers}\OperatorTok{$}\NormalTok{Style, }\DataTypeTok{ignore.case =}\NormalTok{ T), }\StringTok{"Ale"}\NormalTok{, }\StringTok{"Other"}\NormalTok{))}
+\CommentTok{#Plot ABV and IBU relationship by class#}
+\KeywordTok{ggplot}\NormalTok{(BBeers,}\DataTypeTok{mapping =} \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ABV,}\DataTypeTok{y=}\NormalTok{IBU))}\OperatorTok{+}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{colour =}\NormalTok{ BBeers}\OperatorTok{$}\NormalTok{Class))}\OperatorTok{+}\KeywordTok{geom_smooth}\NormalTok{(}\DataTypeTok{method =} \StringTok{"lm"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning: Removed 1005 rows containing non-finite values (stat_smooth).
+\end{verbatim}
+
+\begin{verbatim}
+## Warning: Removed 1005 rows containing missing values (geom_point).
+\end{verbatim}
+
+\includegraphics{Anheuser-Busch-Project_files/figure-latex/unnamed-chunk-8-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Create train and test sets#}
+\NormalTok{BeersTrain <-}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(BBeers)}
+\NormalTok{BeersTest <-}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(Beers)}
+\CommentTok{#Set up KNN analysis#}
+\KeywordTok{knn}\NormalTok{(BeersTrain[,}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{],BeersTest[,}\DecValTok{3}\OperatorTok{:}\DecValTok{4}\NormalTok{],BeersTrain}\OperatorTok{$}\NormalTok{Class,}\DataTypeTok{k=}\DecValTok{5}\NormalTok{, }\DataTypeTok{prob =}\NormalTok{ T)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    [1] IPA   IPA   Other Ale   Other Other Other IPA   IPA   IPA   IPA  
+##   [12] IPA   Ale   Other IPA   Ale   IPA   Other IPA   Other Ale   Other
+##   [23] Ale   IPA   Other Ale   Ale   IPA   Ale   Ale   IPA   Other Other
+##   [34] IPA   Ale   Other IPA   Ale   IPA   IPA   Other Ale   Other Ale  
+##   [45] Other Other IPA   Other IPA   Ale   Other Ale   Other Ale   Ale  
+##   [56] IPA   Ale   Ale   Ale   Other Other IPA   Ale   Other Other Ale  
+##   [67] Other Other Ale   IPA   Ale   Ale   Ale   IPA   Ale   Other IPA  
+##   [78] Ale   Other Other Other IPA   Other Ale   IPA   Ale   IPA   Other
+##   [89] IPA   Ale   Other IPA   Other Other IPA   Other Ale   Other IPA  
+##  [100] Other Ale   Ale   Ale   Other Ale   Ale   IPA   Other Ale   Ale  
+##  [111] IPA   IPA   Ale   Ale   Ale   IPA   Other IPA   IPA   Ale   Ale  
+##  [122] Ale   IPA   Other Ale   IPA   Ale   Other IPA   IPA   Other Ale  
+##  [133] IPA   Other IPA   Ale   IPA   Ale   IPA   Ale   Other Ale   Ale  
+##  [144] Ale   IPA   IPA   Ale   IPA   Ale   IPA   IPA   Ale   Ale   Ale  
+##  [155] IPA   Ale   Ale   IPA   Ale   Ale   Ale   IPA   Ale   Ale   Other
+##  [166] IPA   Ale   Ale   Ale   IPA   Ale   Ale   Other IPA   IPA   IPA  
+##  [177] Ale   Ale   Other Ale   Ale   Ale   IPA   Other Other Other Ale  
+##  [188] IPA   IPA   Ale   Ale   IPA   Other Other Ale   Ale   IPA   Ale  
+##  [199] Ale   IPA   Ale   Other Other IPA   Other Ale   IPA   Ale   Other
+##  [210] Ale   Other Other Other Ale   Other Ale   Ale   Ale   IPA   IPA  
+##  [221] IPA   IPA   Ale   Ale   Other Other IPA   Ale   IPA   Ale   Ale  
+##  [232] Other Other IPA   IPA   IPA   IPA   IPA   Other Ale   Other Other
+##  [243] IPA   Ale   IPA   Ale   IPA   Ale   Ale   Ale   Ale   Other IPA  
+##  [254] Ale   Ale   IPA   Ale   Other Ale   IPA   IPA   Ale   Ale   Ale  
+##  [265] Ale   Ale   Ale   IPA   Ale   IPA   IPA   Other Ale   Ale   Other
+##  [276] IPA   Other Other Ale   Other IPA   Ale   IPA   Other IPA   Ale  
+##  [287] Other Ale   IPA   IPA   Ale   Ale   Other Ale   Other Ale   Other
+##  [298] Other IPA   IPA   IPA   Ale   Other IPA   Other Ale   IPA   Ale  
+##  [309] Other Other IPA   Other Other IPA   Other IPA   IPA   IPA   IPA  
+##  [320] IPA   IPA   IPA   Other Other Other IPA   IPA   Other IPA   IPA  
+##  [331] Ale   Other IPA   Other IPA   Ale   Ale   IPA   Other Other Other
+##  [342] IPA   Ale   Other Other Ale   Ale   Ale   Ale   Ale   Other Other
+##  [353] IPA   IPA   Other Ale   IPA   Ale   Ale   IPA   IPA   Other IPA  
+##  [364] Ale   IPA   Ale   Ale   Other Other IPA   Other Other Other Ale  
+##  [375] Ale   Ale   IPA   Other IPA   IPA   Other Ale   Ale   IPA   Ale  
+##  [386] IPA   IPA   Ale   Ale   IPA   Ale   IPA   Ale   Ale   Ale   IPA  
+##  [397] Ale   IPA   Other Ale   Ale   Ale   IPA   Ale   Ale   IPA   Ale  
+##  [408] Ale   Ale   IPA   Other IPA   Ale   IPA   Ale   Ale   IPA   IPA  
+##  [419] Other IPA   Other IPA   Other Ale   Other Other IPA   Other IPA  
+##  [430] Ale   IPA   Other Ale   IPA   Other Other Other IPA   Other Other
+##  [441] Ale   IPA   IPA   Other Ale   Ale   Other Other IPA   Other Ale  
+##  [452] Ale   Ale   IPA   Ale   Ale   Other IPA   IPA   Ale   Ale   IPA  
+##  [463] IPA   Other IPA   IPA   IPA   IPA   Ale   IPA   IPA   Ale   IPA  
+##  [474] IPA   IPA   Ale   Ale   IPA   Other Ale   IPA   Ale   IPA   Ale  
+##  [485] Ale   IPA   Ale   Ale   Ale   Ale   Other Ale   Ale   Ale   Ale  
+##  [496] Ale   Other Other IPA   Ale   Ale   Other Other Ale   Other Ale  
+##  [507] Other Other IPA   IPA   Other Other Ale   IPA   Ale   IPA   Other
+##  [518] Other Ale   Other Other Ale   Other Other Ale   Ale   IPA   Ale  
+##  [529] IPA   Other Ale   Ale   Ale   Ale   Other IPA   IPA   IPA   Ale  
+##  [540] Ale   Ale   Ale   Other Other Ale   Ale   Ale   Ale   Ale   Ale  
+##  [551] IPA   Ale   Ale   Other Other IPA   Ale   Ale   Other Ale   Other
+##  [562] IPA   Ale   Ale   IPA   Other Other Other IPA   IPA   Other IPA  
+##  [573] IPA   Ale   Ale   IPA   Other Other IPA   Other Ale   Ale   Ale  
+##  [584] Ale   Ale   Other Other Ale   Ale   IPA   IPA   Ale   Other IPA  
+##  [595] IPA   Ale   Ale   Ale   Ale   Ale   Ale   Ale   Ale   Ale   Ale  
+##  [606] Ale   Ale   Ale   Ale   Ale   Ale   Ale   Other IPA   IPA   IPA  
+##  [617] Ale   IPA   Ale   IPA   Other IPA   Other Other Ale   IPA   Ale  
+##  [628] Ale   Ale   Other Other IPA   Ale   Ale   Ale   Ale   Ale   Ale  
+##  [639] IPA   IPA   Ale   Ale   Other Ale   IPA   Other Ale   Other Other
+##  [650] Ale   Other Ale   Other Other Ale   Other IPA   Ale   IPA   Other
+##  [661] Other Ale   Ale   Ale   Ale   Ale   Ale   IPA   Other IPA   Other
+##  [672] Other Other Other Other Other Other IPA   Ale   Other Other Other
+##  [683] IPA   IPA   IPA   Ale   Ale   Other Ale   Ale   IPA   Other Other
+##  [694] Other Ale   IPA   Other Ale   Other Other Other Ale   IPA   Ale  
+##  [705] Ale   Ale   Ale   Ale   Ale   Ale   Other Other Ale   IPA   Other
+##  [716] Ale   Other Other Other Ale   Other Ale   Ale   IPA   IPA   IPA  
+##  [727] Other Ale   Ale   Ale   IPA   Ale   IPA   IPA   Other Other Ale  
+##  [738] Other IPA   Other Ale   Ale   IPA   Ale   Ale   Ale   IPA   IPA  
+##  [749] Ale   Ale   Ale   Ale   Other Ale   IPA   Other IPA   IPA   Other
+##  [760] Ale   IPA   IPA   IPA   Ale   IPA   Ale   Ale   Other IPA   Ale  
+##  [771] IPA   Other Other Ale   IPA   IPA   IPA   IPA   IPA   Ale   IPA  
+##  [782] Ale   Ale   Other IPA   Ale   Ale   Other Ale   Other Other Ale  
+##  [793] Ale   Ale   IPA   Other Ale   Other Ale   Ale   Ale   Other Other
+##  [804] Other Other Other Other IPA   IPA   Ale   Ale   Other Ale   Ale  
+##  [815] Ale   IPA   Other Other Ale   Other Ale   Other IPA   Ale   IPA  
+##  [826] Ale   Other IPA   IPA   Ale   Ale   Ale   Ale   Ale   IPA   Ale  
+##  [837] Ale   Ale   Ale   Other Ale   IPA   IPA   Ale   IPA   Ale   Other
+##  [848] IPA   Other Ale   Ale   Ale   IPA   Other Ale   Ale   Other Ale  
+##  [859] Ale   Other Ale   Ale   Ale   Ale   Ale   Ale   Other Ale   Ale  
+##  [870] Ale   IPA   Ale   Ale   IPA   IPA   Other IPA   Other Other IPA  
+##  [881] Ale   IPA   Ale   IPA   Other Other Ale   Ale   Ale   Ale   Ale  
+##  [892] Ale   Ale   Ale   Other IPA   Other IPA   Ale   Ale   Ale   Ale  
+##  [903] Ale   Ale   Ale   Ale   Other Ale   Ale   Ale   IPA   Ale   Other
+##  [914] IPA   Ale   Other IPA   IPA   Other Ale   Ale   Ale   Ale   Ale  
+##  [925] Other Other IPA   IPA   IPA   Other Ale   Ale   Other Ale   Ale  
+##  [936] IPA   IPA   Ale   Ale   Ale   Ale   Ale   Other IPA   Other Ale  
+##  [947] Ale   Ale   Ale   Ale   Ale   Other Other Other Ale   Other Ale  
+##  [958] Ale   Ale   Ale   Other Ale   Ale   Other Ale   Ale   Other Other
+##  [969] Ale   Other IPA   IPA   Other IPA   Ale   Ale   Ale   Other Other
+##  [980] IPA   Ale   Ale   Ale   IPA   Other Ale   Ale   IPA   Ale   Ale  
+##  [991] Ale   IPA   IPA   IPA   Ale   Ale   Ale   Ale   Ale   Ale   Ale  
+## [1002] Ale   Other IPA   Ale   Other Other Other IPA   Ale   Ale   Other
+## [1013] IPA   Other Ale   Ale   Ale   IPA   Ale   Ale   Ale   Ale   IPA  
+## [1024] IPA   Ale   IPA   Other Ale   Other Other Other Other IPA   IPA  
+## [1035] Ale   Ale   Ale   Ale   Ale   IPA   IPA   IPA   Other Ale   Other
+## [1046] IPA   Other IPA   Other Ale   IPA   Ale   IPA   IPA   IPA   Ale  
+## [1057] Other Other IPA   Other Ale   Other Ale   IPA   IPA   Ale   Ale  
+## [1068] Ale   Other IPA   IPA   Ale   Ale   Other IPA   Other IPA   IPA  
+## [1079] Other Other Other Other IPA   Other IPA   Ale   Other IPA   Ale  
+## [1090] IPA   Other Other IPA   Ale   Other Other Ale   IPA   IPA   IPA  
+## [1101] IPA   Ale   Other IPA   IPA   Other Ale   Other Ale   IPA   IPA  
+## [1112] IPA   Ale   Ale   Ale   IPA   Other Ale   Ale   Ale   Other IPA  
+## [1123] IPA   IPA   Ale   Ale   IPA   Other Other Ale   Ale   Ale   Other
+## [1134] Other Other IPA   Other IPA   Ale   Other Other Ale   Other Other
+## [1145] Other Other Other IPA   Other Other Other Other Ale   Ale   Ale  
+## [1156] Other Other Ale   Ale   Other Other Other Ale   Ale   Other IPA  
+## [1167] Other Other Other Ale   Ale   IPA   IPA   Ale   Other Ale   Other
+## [1178] Ale   Ale   Ale   IPA   IPA   IPA   IPA   Ale   IPA   IPA   Ale  
+## [1189] IPA   Other Other Other Other Ale   Other Ale   Ale   IPA   Ale  
+## [1200] IPA   Other Other Other Ale   Ale   Other IPA   IPA   Ale   Ale  
+## [1211] Ale   Ale   IPA   Other Ale   IPA   IPA   Other Ale   Other Other
+## [1222] Ale   IPA   IPA   IPA   Other Ale   Ale   Other Ale   Ale   Ale  
+## [1233] Ale   Ale   IPA   Other IPA   Ale   Ale   Ale   Other IPA   Other
+## [1244] Ale   IPA   IPA   Other Ale   Ale   Ale   Other Other IPA   IPA  
+## [1255] IPA   Ale   IPA   Other Ale   Other Ale   Ale   Other Ale   IPA  
+## [1266] Ale   Other Other Ale   Other IPA   Ale   Ale   IPA   Ale   Ale  
+## [1277] Ale   Ale   Other IPA   IPA   Ale   Ale   Ale   Ale   IPA   Ale  
+## [1288] Ale   Ale   Ale   Ale   IPA   Other IPA   Ale   IPA   Ale   Other
+## [1299] IPA   Other IPA   Other IPA   Ale   Ale   Ale   Other IPA   IPA  
+## [1310] Ale   Ale   Other IPA   Ale   IPA   Ale   Ale   Other Ale   Other
+## [1321] IPA   Other Ale   Ale   IPA   Other Other IPA   Ale   Ale   IPA  
+## [1332] Other IPA   Other Ale   Other Ale   IPA   Ale   Ale   IPA   Ale  
+## [1343] Ale   Other Ale   IPA   IPA   IPA   Other Other Ale   Other IPA  
+## [1354] IPA   Ale   IPA   Ale   IPA   Other Ale   Ale   Other IPA   IPA  
+## [1365] Ale   Other Other IPA   Ale   Ale   IPA   Other Other Other Other
+## [1376] IPA   Other IPA   IPA   Ale   Other Ale   Ale   Ale   Other Ale  
+## [1387] IPA   Ale   IPA   Other IPA   Ale   IPA   IPA   Ale   IPA   Ale  
+## [1398] IPA   IPA   Other Ale   IPA   Ale   Ale   Ale  
+## attr(,"prob")
+##    [1] 0.7142857 0.8000000 0.6000000 0.6666667 1.0000000 1.0000000
+##    [7] 1.0000000 0.9230769 0.9230769 0.9230769 0.6000000 1.0000000
+##   [13] 0.6666667 0.6000000 0.6666667 0.8571429 1.0000000 1.0000000
+##   [19] 1.0000000 0.6000000 0.8333333 0.7142857 0.6666667 0.8181818
+##   [25] 0.4000000 0.5000000 0.6666667 0.8571429 1.0000000 1.0000000
+##   [31] 1.0000000 1.0000000 1.0000000 0.6000000 0.6000000 0.8000000
+##   [37] 0.6666667 0.5882353 0.6666667 0.5000000 0.6000000 0.5714286
+##   [43] 0.5000000 0.6000000 0.5000000 0.5555556 0.6666667 0.6000000
+##   [49] 1.0000000 0.5882353 0.8000000 0.6666667 0.7142857 0.8571429
+##   [55] 0.6000000 1.0000000 0.6000000 0.6000000 0.6000000 1.0000000
+##   [61] 0.5000000 1.0000000 0.6000000 1.0000000 0.5714286 0.6000000
+##   [67] 0.5000000 1.0000000 0.5555556 1.0000000 0.6000000 0.5000000
+##   [73] 0.8000000 0.7000000 1.0000000 0.8000000 0.6000000 0.6000000
+##   [79] 0.4000000 0.6000000 0.6666667 0.5000000 0.6000000 0.5000000
+##   [85] 0.8000000 0.5714286 0.7777778 0.7142857 1.0000000 0.6000000
+##   [91] 0.6250000 0.8000000 0.7500000 0.8333333 1.0000000 0.6000000
+##   [97] 0.5000000 0.8000000 0.8000000 0.5555556 0.6000000 0.6000000
+##  [103] 0.5555556 1.0000000 0.5555556 0.6000000 1.0000000 0.6000000
+##  [109] 0.6000000 0.6000000 1.0000000 0.9230769 0.8000000 0.6000000
+##  [115] 0.8000000 0.6000000 0.5714286 1.0000000 0.8000000 0.5882353
+##  [121] 0.7142857 0.7272727 1.0000000 0.7142857 0.6000000 0.6250000
+##  [127] 0.6666667 0.7500000 1.0000000 1.0000000 0.6000000 0.5000000
+##  [133] 0.8000000 0.6000000 0.6666667 0.5000000 1.0000000 0.6000000
+##  [139] 0.5714286 0.5000000 0.6000000 0.6666667 0.7777778 0.6666667
+##  [145] 1.0000000 0.8000000 0.7000000 0.6000000 0.6250000 0.6000000
+##  [151] 1.0000000 0.7500000 0.6666667 1.0000000 0.9000000 1.0000000
+##  [157] 0.6666667 1.0000000 0.7500000 0.6666667 1.0000000 0.8888889
+##  [163] 0.6000000 0.8000000 0.6000000 0.7500000 0.6666667 0.5714286
+##  [169] 0.5714286 0.5000000 0.5714286 0.7142857 0.8000000 0.5000000
+##  [175] 0.8571429 0.5000000 0.6000000 0.6000000 0.6000000 0.7142857
+##  [181] 0.4000000 0.6000000 0.8888889 0.6000000 0.6000000 0.6000000
+##  [187] 0.5714286 0.6000000 0.6000000 0.6000000 1.0000000 0.6000000
+##  [193] 0.6666667 0.5714286 0.5000000 0.8000000 0.4000000 0.6000000
+##  [199] 0.6250000 1.0000000 0.5000000 1.0000000 1.0000000 1.0000000
+##  [205] 0.6000000 0.6666667 1.0000000 0.5000000 0.8333333 0.6000000
+##  [211] 1.0000000 1.0000000 1.0000000 0.8333333 1.0000000 0.6875000
+##  [217] 0.6666667 0.6875000 0.6666667 0.5000000 0.4285714 1.0000000
+##  [223] 0.5000000 0.5714286 0.8181818 0.5714286 0.5714286 0.6666667
+##  [229] 0.9000000 0.8000000 0.8000000 0.5000000 0.5714286 1.0000000
+##  [235] 0.6000000 0.6000000 0.7500000 0.7142857 0.6000000 0.5714286
+##  [241] 0.5714286 0.5000000 0.8888889 0.6666667 0.8000000 0.5000000
+##  [247] 0.8888889 0.6666667 0.6000000 0.6250000 0.5454545 0.5000000
+##  [253] 1.0000000 0.5000000 0.5454545 1.0000000 0.7777778 0.6000000
+##  [259] 0.7142857 1.0000000 1.0000000 0.7777778 0.7777778 0.7777778
+##  [265] 0.7777778 0.7777778 0.7142857 1.0000000 0.6666667 1.0000000
+##  [271] 0.8333333 0.6000000 0.5714286 0.6666667 0.5714286 0.6666667
+##  [277] 0.6666667 1.0000000 0.7777778 1.0000000 1.0000000 0.6666667
+##  [283] 0.6000000 0.8181818 0.6000000 0.6000000 0.6000000 0.5000000
+##  [289] 0.8000000 1.0000000 0.6000000 0.6000000 0.6000000 0.7500000
+##  [295] 0.6000000 0.7500000 0.6000000 0.5555556 0.8333333 0.4545455
+##  [301] 0.8000000 0.4545455 0.5714286 1.0000000 0.8000000 0.5714286
+##  [307] 0.8750000 0.6666667 0.6666667 0.8000000 1.0000000 0.5000000
+##  [313] 0.5714286 1.0000000 0.4000000 1.0000000 1.0000000 1.0000000
+##  [319] 1.0000000 1.0000000 0.6666667 0.6666667 0.4000000 0.5714286
+##  [325] 0.5714286 0.5000000 0.6666667 0.6000000 1.0000000 0.8571429
+##  [331] 0.6000000 0.9000000 0.5000000 0.6000000 1.0000000 0.6666667
+##  [337] 0.6666667 0.8888889 0.5714286 0.8000000 0.5000000 0.6666667
+##  [343] 0.8000000 0.6000000 1.0000000 0.7142857 0.7083333 0.7500000
+##  [349] 0.7142857 0.6000000 0.5000000 0.6666667 0.8000000 0.6666667
+##  [355] 0.5000000 0.6000000 1.0000000 0.5714286 0.6000000 0.9230769
+##  [361] 0.6666667 0.8000000 0.6250000 1.0000000 0.7777778 1.0000000
+##  [367] 0.7500000 0.6250000 0.5714286 1.0000000 0.6000000 0.4285714
+##  [373] 0.5714286 0.5000000 0.8000000 0.6250000 0.8333333 0.6666667
+##  [379] 1.0000000 1.0000000 0.6000000 0.6000000 0.8000000 1.0000000
+##  [385] 0.8333333 1.0000000 1.0000000 0.7500000 0.8750000 0.6666667
+##  [391] 0.6250000 0.8000000 0.6000000 0.6250000 1.0000000 1.0000000
+##  [397] 0.4444444 1.0000000 0.6666667 0.5882353 0.5882353 0.5882353
+##  [403] 0.9230769 0.5555556 0.5555556 0.6000000 0.5714286 0.5714286
+##  [409] 0.6000000 0.6000000 0.5714286 0.6000000 0.4000000 0.5714286
+##  [415] 0.5555556 0.6666667 1.0000000 0.8888889 0.5555556 0.9230769
+##  [421] 0.6000000 0.8181818 0.8000000 1.0000000 0.5714286 0.8000000
+##  [427] 0.7142857 0.4000000 1.0000000 0.5000000 0.8888889 0.7142857
+##  [433] 0.5833333 1.0000000 0.5714286 0.8000000 0.8181818 0.6000000
+##  [439] 0.8000000 0.7142857 0.8333333 0.9230769 1.0000000 1.0000000
+##  [445] 0.5714286 0.6000000 0.8000000 0.8333333 1.0000000 1.0000000
+##  [451] 0.5000000 0.6000000 0.6000000 0.6666667 0.6666667 0.6666667
+##  [457] 0.6000000 1.0000000 0.6000000 0.6153846 0.8000000 1.0000000
+##  [463] 0.5000000 0.6000000 1.0000000 0.8750000 0.8000000 0.6000000
+##  [469] 0.5000000 0.6666667 0.6000000 1.0000000 0.8750000 0.8750000
+##  [475] 0.6000000 0.5000000 0.6000000 0.9230769 0.6000000 0.6250000
+##  [481] 1.0000000 0.4545455 1.0000000 0.7142857 0.6666667 0.6250000
+##  [487] 1.0000000 1.0000000 1.0000000 1.0000000 0.8000000 0.8000000
+##  [493] 0.6666667 0.8000000 0.6666667 1.0000000 0.8333333 0.6666667
+##  [499] 0.8000000 0.5000000 1.0000000 0.6666667 1.0000000 0.6666667
+##  [505] 0.8333333 0.5000000 0.5000000 0.8571429 0.8333333 0.8000000
+##  [511] 0.6666667 0.7777778 0.8571429 0.8000000 1.0000000 0.6000000
+##  [517] 0.5714286 0.5714286 0.8000000 1.0000000 0.5000000 0.6000000
+##  [523] 0.7000000 0.6666667 1.0000000 0.6000000 0.8000000 0.5000000
+##  [529] 0.9230769 0.6250000 0.5714286 0.6000000 0.6000000 1.0000000
+##  [535] 0.7000000 0.5714286 0.7777778 0.8750000 0.4545455 0.8571429
+##  [541] 0.5000000 0.4545455 0.5714286 0.5555556 0.5000000 0.6666667
+##  [547] 0.6000000 0.6666667 0.4000000 0.6000000 0.7777778 0.6666667
+##  [553] 0.6666667 0.8000000 0.6000000 0.6666667 0.8750000 0.7777778
+##  [559] 1.0000000 0.5000000 0.7142857 0.6666667 0.5000000 0.5714286
+##  [565] 0.6666667 0.7142857 0.5714286 0.7142857 0.6666667 0.7142857
+##  [571] 0.5714286 0.8000000 0.4444444 0.6000000 0.6363636 1.0000000
+##  [577] 0.6000000 0.5714286 0.6000000 0.6250000 0.5000000 0.5000000
+##  [583] 0.6000000 1.0000000 0.6000000 0.8333333 0.5555556 0.5000000
+##  [589] 0.6000000 0.6000000 1.0000000 0.6000000 0.6666667 1.0000000
+##  [595] 1.0000000 0.6000000 0.7000000 0.8000000 0.6000000 1.0000000
+##  [601] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
+##  [607] 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000 1.0000000
+##  [613] 0.6000000 0.8000000 0.7142857 0.6000000 1.0000000 0.7142857
+##  [619] 0.6666667 0.8000000 0.6000000 1.0000000 0.6000000 0.6000000
+##  [625] 0.6250000 0.6666667 0.6363636 0.5714286 0.6000000 0.6666667
+##  [631] 0.6666667 1.0000000 1.0000000 0.8000000 0.5714286 0.6000000
+##  [637] 0.6666667 0.8333333 0.8750000 0.5714286 0.6000000 0.6250000
+##  [643] 0.5000000 0.8000000 0.8333333 1.0000000 0.5714286 0.6250000
+##  [649] 0.8571429 0.6666667 0.5714286 0.5555556 0.6000000 0.3750000
+##  [655] 0.6000000 1.0000000 1.0000000 0.6666667 1.0000000 0.6666667
+##  [661] 0.5000000 0.6000000 0.7083333 0.7083333 0.7142857 0.7083333
+##  [667] 0.6000000 1.0000000 0.8000000 1.0000000 0.6000000 1.0000000
+##  [673] 1.0000000 1.0000000 1.0000000 0.8181818 0.8750000 1.0000000
+##  [679] 0.6000000 0.5714286 0.6000000 1.0000000 0.8000000 0.8571429
+##  [685] 1.0000000 0.6000000 0.6000000 0.8333333 0.5000000 0.5833333
+##  [691] 1.0000000 0.7142857 0.4000000 0.8000000 0.6666667 0.6666667
+##  [697] 0.8000000 0.6000000 0.8333333 0.8000000 0.8000000 0.6000000
+##  [703] 1.0000000 0.7777778 0.6000000 1.0000000 0.8000000 0.7777778
+##  [709] 0.6666667 1.0000000 0.6000000 0.6000000 0.7500000 0.9375000
+##  [715] 0.6000000 0.6000000 0.6000000 1.0000000 0.6000000 0.8000000
+##  [721] 0.6000000 0.6000000 0.6666667 1.0000000 0.5714286 1.0000000
+##  [727] 0.5000000 0.8000000 0.6000000 0.5882353 0.6000000 0.6666667
+##  [733] 1.0000000 1.0000000 0.6000000 0.6000000 0.8333333 0.6000000
+##  [739] 0.6666667 0.8333333 0.8333333 0.6000000 1.0000000 0.6000000
+##  [745] 0.6000000 0.8333333 0.5000000 0.5000000 0.6000000 0.5000000
+##  [751] 0.6000000 0.6000000 0.6666667 0.7000000 0.8000000 0.6666667
+##  [757] 0.8000000 0.8000000 0.6250000 0.6000000 1.0000000 1.0000000
+##  [763] 0.6666667 0.8333333 1.0000000 0.6363636 0.6000000 0.8000000
+##  [769] 0.6000000 0.6250000 0.6666667 0.6000000 0.7857143 0.6250000
+##  [775] 0.8000000 0.6000000 0.6000000 0.6666667 0.8888889 0.8000000
+##  [781] 0.8000000 0.5714286 1.0000000 0.8333333 0.8000000 0.6000000
+##  [787] 0.8000000 1.0000000 0.6000000 0.6000000 0.5714286 0.6666667
+##  [793] 0.6666667 0.6666667 0.9230769 0.6666667 0.7142857 0.8333333
+##  [799] 0.6000000 0.7000000 0.8571429 0.6000000 0.5714286 0.6000000
+##  [805] 0.5000000 0.6000000 0.8333333 1.0000000 1.0000000 0.6000000
+##  [811] 0.7083333 0.5714286 0.8333333 0.7142857 0.6666667 1.0000000
+##  [817] 0.5000000 0.8000000 0.6666667 0.5000000 0.6666667 0.5000000
+##  [823] 1.0000000 0.6666667 1.0000000 0.6666667 0.8571429 1.0000000
+##  [829] 1.0000000 0.8750000 0.6000000 0.8000000 0.6000000 0.8000000
+##  [835] 0.8750000 0.5714286 0.8333333 1.0000000 0.6000000 0.5000000
+##  [841] 0.4000000 0.7142857 0.8000000 0.8000000 1.0000000 0.7142857
+##  [847] 0.6666667 1.0000000 0.6666667 0.7142857 0.6250000 0.6250000
+##  [853] 0.6000000 0.5000000 0.6000000 0.6000000 0.8000000 0.7142857
+##  [859] 0.6666667 1.0000000 0.6250000 0.7083333 0.7142857 0.6875000
+##  [865] 0.7083333 0.7083333 0.8000000 0.7083333 0.7083333 0.7083333
+##  [871] 1.0000000 0.7083333 0.7083333 1.0000000 0.8750000 0.6000000
+##  [877] 1.0000000 0.7142857 0.8000000 0.6000000 1.0000000 1.0000000
+##  [883] 0.7083333 1.0000000 0.7142857 0.7142857 1.0000000 1.0000000
+##  [889] 1.0000000 0.7083333 0.7083333 0.7083333 0.7083333 0.7083333
+##  [895] 0.4285714 1.0000000 0.7142857 0.8571429 1.0000000 0.7083333
+##  [901] 0.7083333 0.5714286 0.7272727 0.4545455 0.6000000 0.6000000
+##  [907] 0.5714286 0.6000000 0.6000000 0.6000000 1.0000000 0.6250000
+##  [913] 0.5714286 0.8000000 0.6000000 0.7777778 0.8000000 0.8000000
+##  [919] 0.6666667 0.8333333 0.7083333 0.7500000 0.6666667 0.6000000
+##  [925] 0.6250000 0.6000000 1.0000000 0.7142857 1.0000000 0.5000000
+##  [931] 0.8333333 0.8333333 0.5714286 0.8333333 1.0000000 0.9230769
+##  [937] 0.8888889 0.7142857 0.6363636 0.6666667 0.6666667 0.5714286
+##  [943] 0.6666667 0.5714286 0.6666667 0.6666667 0.6666667 0.6666667
+##  [949] 0.6000000 0.5714286 1.0000000 1.0000000 1.0000000 0.6000000
+##  [955] 0.7142857 0.4285714 0.8000000 0.7142857 0.6000000 0.5000000
+##  [961] 0.6000000 0.5714286 0.5000000 0.6666667 0.6000000 0.6000000
+##  [967] 0.6666667 0.8000000 0.7500000 0.6000000 1.0000000 0.6000000
+##  [973] 0.5000000 1.0000000 0.6666667 0.6000000 0.7142857 1.0000000
+##  [979] 0.5000000 1.0000000 0.6000000 0.5000000 0.6000000 0.6000000
+##  [985] 0.6000000 0.6666667 0.5000000 0.5000000 0.5714286 0.6923077
+##  [991] 1.0000000 1.0000000 0.6666667 1.0000000 0.6666667 0.6153846
+##  [997] 0.6000000 0.8000000 0.6000000 0.5000000 0.6000000 0.8000000
+## [1003] 0.5000000 0.8000000 0.5714286 0.5714286 0.6000000 0.8000000
+## [1009] 0.6000000 0.5000000 1.0000000 0.5000000 1.0000000 0.6000000
+## [1015] 0.5714286 0.5882353 0.5714286 1.0000000 0.5000000 0.5714286
+## [1021] 1.0000000 0.8000000 0.6666667 1.0000000 0.5714286 0.8571429
+## [1027] 0.5714286 0.6666667 0.4000000 0.7000000 0.6000000 0.8000000
+## [1033] 0.8333333 1.0000000 0.6000000 0.6666667 0.7777778 0.6666667
+## [1039] 0.6666667 0.6000000 0.8181818 1.0000000 0.6000000 0.8333333
+## [1045] 0.7142857 1.0000000 0.6000000 0.6000000 0.6000000 0.6000000
+## [1051] 0.8000000 0.5714286 1.0000000 0.9230769 1.0000000 0.6000000
+## [1057] 0.5000000 0.6666667 0.8000000 0.6000000 0.4000000 0.6000000
+## [1063] 0.6875000 1.0000000 0.8000000 0.6666667 0.6000000 0.5000000
+## [1069] 0.6666667 0.8000000 0.6666667 0.6000000 1.0000000 0.6666667
+## [1075] 0.6666667 0.5555556 0.5000000 1.0000000 0.5714286 0.7272727
+## [1081] 0.6250000 0.5714286 0.8333333 0.8571429 0.8571429 0.6666667
+## [1087] 0.8000000 0.6000000 0.7000000 1.0000000 0.6000000 0.4285714
+## [1093] 0.6000000 0.6000000 0.5714286 0.6000000 0.6000000 1.0000000
+## [1099] 1.0000000 1.0000000 0.6000000 0.6000000 0.6000000 0.8333333
+## [1105] 1.0000000 0.6000000 0.6666667 0.5714286 0.5714286 1.0000000
+## [1111] 0.8000000 0.6250000 0.6666667 1.0000000 0.5882353 0.6000000
+## [1117] 0.8333333 0.5882353 1.0000000 0.6000000 0.8000000 1.0000000
+## [1123] 0.7142857 1.0000000 0.6666667 0.5882353 0.6000000 0.8000000
+## [1129] 0.4000000 0.6000000 0.5882353 0.6000000 0.5714286 0.5714286
+## [1135] 0.8000000 0.6000000 0.6250000 0.6000000 0.7083333 1.0000000
+## [1141] 1.0000000 0.7083333 1.0000000 1.0000000 0.7142857 1.0000000
+## [1147] 0.8888889 1.0000000 1.0000000 1.0000000 1.0000000 0.5714286
+## [1153] 0.8333333 0.8000000 0.8000000 0.6000000 0.5714286 0.6000000
+## [1159] 0.8000000 0.7142857 0.6000000 1.0000000 0.8000000 0.6000000
+## [1165] 0.7000000 0.8125000 0.8333333 0.8333333 0.6000000 0.8000000
+## [1171] 0.6000000 0.4000000 1.0000000 0.6000000 0.5714286 0.8000000
+## [1177] 0.8000000 0.6000000 0.6000000 0.6666667 1.0000000 1.0000000
+## [1183] 1.0000000 1.0000000 0.6000000 0.4000000 0.8000000 0.7777778
+## [1189] 0.6000000 0.8571429 0.7142857 0.5714286 0.6000000 0.5714286
+## [1195] 0.6666667 0.6666667 0.6666667 0.7777778 0.6000000 0.8000000
+## [1201] 0.6666667 0.6000000 0.5714286 0.7777778 0.7777778 0.6000000
+## [1207] 1.0000000 0.8750000 0.5000000 0.5000000 0.7142857 0.7142857
+## [1213] 0.8888889 0.6000000 0.6000000 0.8888889 0.6000000 0.6000000
+## [1219] 0.8000000 0.6000000 0.6000000 0.6666667 0.8750000 0.6000000
+## [1225] 0.6000000 0.7500000 0.8000000 0.8000000 0.7500000 0.6000000
+## [1231] 0.6000000 0.6000000 0.8750000 0.5882353 1.0000000 0.5714286
+## [1237] 0.6666667 0.5882353 0.5882353 0.5882353 0.8000000 0.6666667
+## [1243] 0.6250000 0.5882353 0.8571429 1.0000000 0.5000000 0.5000000
+## [1249] 0.5000000 0.6666667 0.8571429 0.7500000 1.0000000 0.8888889
+## [1255] 0.8888889 0.7142857 1.0000000 0.6000000 0.5714286 0.6250000
+## [1261] 1.0000000 0.6666667 0.8000000 0.5000000 0.7142857 0.5000000
+## [1267] 0.7857143 0.6000000 1.0000000 0.5714286 1.0000000 1.0000000
+## [1273] 0.8000000 0.8333333 0.8000000 0.6250000 0.5714286 0.8000000
+## [1279] 0.6666667 0.8000000 0.8000000 0.7142857 0.5000000 0.8000000
+## [1285] 0.6000000 1.0000000 0.5000000 0.8000000 0.8333333 0.6250000
+## [1291] 0.6000000 1.0000000 0.6666667 1.0000000 0.6000000 0.6666667
+## [1297] 0.5000000 0.6666667 0.6666667 0.4285714 1.0000000 0.8333333
+## [1303] 0.8888889 0.8333333 0.5555556 0.6000000 0.5000000 1.0000000
+## [1309] 1.0000000 0.8333333 0.9090909 0.5000000 1.0000000 0.6000000
+## [1315] 0.8000000 0.6666667 0.6666667 0.6000000 0.6000000 0.8000000
+## [1321] 0.6000000 0.6000000 0.6000000 0.5714286 0.8333333 0.8000000
+## [1327] 0.5000000 1.0000000 0.6000000 0.8000000 0.8571429 0.5000000
+## [1333] 0.8000000 0.8333333 0.5714286 0.5714286 0.6666667 0.4285714
+## [1339] 0.6000000 0.6000000 0.8333333 0.6000000 0.8333333 0.5714286
+## [1345] 1.0000000 1.0000000 0.6000000 0.6000000 0.8000000 0.8000000
+## [1351] 0.6000000 0.8000000 0.7500000 0.6666667 0.5000000 0.6000000
+## [1357] 0.7777778 1.0000000 0.6000000 0.5000000 0.5833333 0.8000000
+## [1363] 0.6000000 0.8750000 0.9090909 1.0000000 0.8000000 0.6666667
+## [1369] 0.7500000 0.5384615 0.8888889 0.7500000 1.0000000 1.0000000
+## [1375] 1.0000000 1.0000000 0.5000000 1.0000000 1.0000000 0.6000000
+## [1381] 0.8000000 0.7000000 0.6000000 0.6666667 1.0000000 0.7142857
+## [1387] 0.8571429 0.6000000 0.8888889 0.6000000 0.8000000 0.5555556
+## [1393] 1.0000000 1.0000000 0.5000000 1.0000000 0.6000000 0.8750000
+## [1399] 1.0000000 1.0000000 0.6000000 1.0000000 0.8000000 0.6000000
+## [1405] 0.6666667
+## Levels: Ale IPA Other
+\end{verbatim}
+
+
+\end{document}
